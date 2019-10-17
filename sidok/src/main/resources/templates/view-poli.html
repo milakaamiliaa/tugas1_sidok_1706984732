@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Poli</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<h1>Sistem Informasi Dokter</h1>
+<div class="container-fluid">
+    <h2>Daftar Poli</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Lokasi</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="poli, iterationStatus : ${listPoli}">
+            <td><a th:text="$iterationStatus.count}"></a></td>
+            <td><a th:text="${poli.nama}"></a></td>
+            <td><a th:text="${poli.nip}"></a></td>
+            <td><a th:text="${poli.nik}"></a></td>
+            <td><a th:text="${poli.jenisKelamin}"></a></td>
+            <td><a th:text="${poli.spesialisasi}"></a></td>
+            <td>
+                <form th:action="@{#}" method="GET"><button type="submit" name="tambahJadwalButton" class="btn btn-sm btn-primary"></button>Tambah Poli</form>
+                <button type="button" name="ubahDokter" th:value="${iterationStatus.count}" class="btn btn-sm btn-secondary">Ubah</button>
+                <button type="button" name="hapusDokter" th:value="${iterationStatus.count}" class="btn btn-sm btn-secondary">Hapus</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <button type="button" name="tambahDokter" class="btn btn-sm btn-secondary float-right">Tambah Poli</button>
+</div>
+</body>
+</html>
