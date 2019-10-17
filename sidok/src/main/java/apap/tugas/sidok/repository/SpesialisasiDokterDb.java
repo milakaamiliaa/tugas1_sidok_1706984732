@@ -10,4 +10,5 @@ import java.util.List;
 public interface SpesialisasiDokterDb extends JpaRepository<SpesialisasiDokterModel, Long> {
     List<SpesialisasiDokterModel> getByDokter(DokterModel dokter);
     List<SpesialisasiDokterModel> getBySpesialisasi(SpesialisasiModel spesialisasi);
+
 }

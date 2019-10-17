@@ -11,4 +11,5 @@ public interface DokterService {
     DokterModel changeDokter(DokterModel dokterModel);
     void deleteDokter(DokterModel dokterModel);
     List<DokterModel> getDokterList();
+
 }

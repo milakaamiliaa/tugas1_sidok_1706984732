@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface SpesialisasiDb extends JpaRepository<SpesialisasiModel, Long> {
     List<SpesialisasiModel> findAll();
-
 }

@@ -28,6 +28,7 @@ public class SpesialisasiDokterModel {
     @JsonIgnore
     private DokterModel dokter;
 
+
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name="id_spesialisasi", referencedColumnName = "id")
     @OnDelete(action = OnDeleteAction.CASCADE)

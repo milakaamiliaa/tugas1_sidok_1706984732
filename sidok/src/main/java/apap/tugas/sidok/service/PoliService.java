@@ -10,4 +10,5 @@ public interface PoliService {
     void addPoli(PoliModel poli);
     Optional<PoliModel> getPoliById(Long idPoli);
     List<PoliModel> getPoliList();
+
 }

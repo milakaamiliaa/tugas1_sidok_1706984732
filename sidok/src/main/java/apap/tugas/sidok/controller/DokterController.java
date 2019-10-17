@@ -22,5 +22,6 @@ public class DokterController {
         List<DokterModel> listDokter = dokterService.getDokterList();
         model.addAttribute("listDokter", listDokter);
         return "home";
+
     }
 }

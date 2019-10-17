@@ -30,6 +30,7 @@ public class JadwalJagaModel implements Serializable {
     @JsonIgnore
     private PoliModel poli;
 
+
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name="id_dokter", referencedColumnName = "id")
     @OnDelete(action = OnDeleteAction.CASCADE)

@@ -45,6 +45,7 @@ public class DokterModel implements Serializable {
     @Column(name="jenis_kelamin", nullable = false)
     private Integer jenis_kelamin;
 
+
     @OneToMany(mappedBy = "dokter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<JadwalJagaModel> listJadwalJaga;
 

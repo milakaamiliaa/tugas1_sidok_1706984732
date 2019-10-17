@@ -18,6 +18,7 @@ public class SpesialisasiServiceImpl implements SpesialisasiService {
         spesialisasiDb.save(spesialisasi);
     }
 
+
     @Override
     public Optional<SpesialisasiModel> getSpesialisasiById(Long id){return spesialisasiDb.findById(id);}
 }

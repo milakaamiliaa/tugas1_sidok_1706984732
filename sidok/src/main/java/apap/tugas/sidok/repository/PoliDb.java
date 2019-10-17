@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface PoliDb extends JpaRepository<PoliModel, Long> {
     Optional<PoliModel> findById(Long idPoli);
     List<PoliModel> findAll();
+
 }

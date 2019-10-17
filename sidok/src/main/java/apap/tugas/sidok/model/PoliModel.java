@@ -15,6 +15,7 @@ public class PoliModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     @NotNull
     @Size(max=255)
     @Column(name="nama", nullable = false)

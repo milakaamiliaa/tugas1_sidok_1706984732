@@ -24,5 +24,6 @@ public class PoliController {
         List<PoliModel> listPoli = poliService.getPoliList();
         model.addAttribute("listDokter", listPoli);
         return "view-poli";
+
     }
 }

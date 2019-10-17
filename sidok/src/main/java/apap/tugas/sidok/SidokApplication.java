@@ -8,6 +8,7 @@ public class SidokApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SidokApplication.class, args);
+
 	}
 
 }
