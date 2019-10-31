@@ -1,6 +1,5 @@
 package apap.tugas.sidok.service;
 
-import apap.tugas.sidok.model.DokterModel;
 import apap.tugas.sidok.model.PoliModel;
 
 import java.util.List;
@@ -10,5 +9,6 @@ public interface PoliService {
     void addPoli(PoliModel poli);
     Optional<PoliModel> getPoliById(Long idPoli);
     List<PoliModel> getPoliList();
-
+    PoliModel changePoli(PoliModel poli);
+    void deletePoli(PoliModel poli);
 }

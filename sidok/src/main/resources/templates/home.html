@@ -7,7 +7,8 @@
 </head>
 <body>
     <nav th:replace="fragments/fragment :: navbar"></nav>
-    <h1>Sistem Informasi Dokter</h1>
+    <h1 style="text-align: center">Sistem Informasi Dokter</h1>
+    <br>
     <div class="container-fluid">
 
         <h2>Daftar Dokter</h2>
@@ -25,22 +26,44 @@
             </tr>
             </thead>
             <tbody>
-                <tr th:each="dokter, iterationStatus : ${listDokter}">
-                    <td><a th:text="$iterationStatus.count}"></a></td>
-                    <td><a th:text="${dokter.nama}"></a></td>
+                <tr th:each="dokter : ${listDokter}">
+                    <td><a th:text="${dokter.id}"></a></td>
+                    <td><a th:text="${dokter.nama}" th:href="@{/dokter/}+${dokter.nik}"></a></td>
                     <td><a th:text="${dokter.nip}"></a></td>
                     <td><a th:text="${dokter.nik}"></a></td>
-                    <td><a th:text="${dokter.jenisKelamin}"></a></td>
-                    <td><a th:text="${dokter.spesialisasi}"></a></td>
                     <td>
-                        <form th:action="@{#}" method="GET"><button type="submit" name="tambahJadwalButton" class="btn btn-sm btn-primary"></button>tambah jadwal</form>
-                        <button type="button" name="ubahDokter" th:value="${iterationStatus.count}" class="btn btn-sm btn-secondary">Ubah</button>
-                        <button type="button" name="hapusDokter" th:value="${iterationStatus.count}" class="btn btn-sm btn-secondary">Hapus</button>
+                        <span th:if="${dokter.jenis_kelamin == 1}">Laki-Laki</span>
+                        <span th:if="${dokter.jenis_kelamin == 2}">Perempuan</span>
                     </td>
+                    <td>
+                        <div th:each="spesialisasi : ${dokter.getListSpesialisasiDokter()}">
+                            <a th:text="${spesialisasi.getSpesialisasi().getNama()}"></a>
+                        </div>
+                    </td>
+
+                    <td>
+                        <form th:action="@{/jadwal/tambah/}+${dokter.nip}" method="GET">
+                            <button type="submit" name="tambahJadwalButton" class="btn btn-sm btn-primary">Tambah Jadwal</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{/dokter/update/}+${dokter.id}">
+                            <button type="submit" th:value="${dokter.id}" class="btn btn-sm btn-secondary">Ubah</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{/dokter/delete/}+${dokter.id}">
+                            <button type="submit" name="hapusDokterButton" th:value="${dokter.id}" class="btn btn-sm btn-secondary">Hapus</button>
+                        </form>
+                    </td>
+
                 </tr>
             </tbody>
         </table>
-        <button type="button" name="tambahDokter" class="btn btn-sm btn-secondary float-right">Tambah Dokter</button>
+        <form th:action="@{/dokter/tambah}" method="GET">
+            <button type="submit" name="tambahDokterButton" class="btn btn-primary btn-sm">Tambah Dokter</button>
+        </form>
+
     </div>
 </body>
 </html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <title>Lihat Detail Poli</title>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div>
+    <div class="container" style='margin-top: 80px; margin-bottom: 20px;'>
+        <h1 class="display-5" style="text-align: center">Detail Poli</h1>
+    </div>
+</div>
+<div class="card" style="margin-left: 60px; margin-right: 60px;">
+    <div class="card-header bg-dark" style="color: white" th:object="${poli}">
+        <h3 th:text="${poli.nama}"></h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-2">
+                <label name="nama"><b>Nama</b></label>
+            </div>
+            <div class="col-2">
+                <a th:text="${poli.nama}" th:href="@{/poli/}+${poli.id}"></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <label name="lokasi"><b>Lokasi</b></label>
+            </div>
+            <div class="col-2">
+                <label name="lokasi"th:text="${poli.lokasi}">Lokasi</label>
+            </div>
+        </div>
+        <br><br>
+        <div>
+            <button class="btn btn-dark float-left" name="ubahDokter">
+                <a th:href="@{/}" style="color: white">Ubah</a>
+            </button>
+        </div>
+        <div>
+            <button class="btn btn-danger float-right">
+                <a th:href="@{/}" style="color: white">Hapus</a>
+            </button>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments/fragment :: footer"></footer>
+</body>
+</html>

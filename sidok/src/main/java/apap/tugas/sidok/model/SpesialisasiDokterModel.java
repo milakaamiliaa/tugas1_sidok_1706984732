@@ -5,6 +5,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -12,15 +13,10 @@ import javax.validation.constraints.Size;
 @Table(name="spesialisasiDokter")
 public class SpesialisasiDokterModel {
 
-    @Size(max=20)
     @Id
+    @Max(20)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotNull
-    @Size(max=255)
-    @Column(name="nama", nullable = false)
-    private String nama;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name="id_dokter", referencedColumnName = "id")
@@ -41,14 +37,6 @@ public class SpesialisasiDokterModel {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getNama() {
-        return nama;
-    }
-
-    public void setNama(String nama) {
-        this.nama = nama;
     }
 
     public DokterModel getDokter() {

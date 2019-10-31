@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Bonus</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar(title = 'BONUS')"></nav>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>No </th>
+        <th>Spesialisasi </th>
+        <th>Jumlah Dokter </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="spes : ${listSpesialisasi}">
+        <td><a th:text="${spes.id}"></a></td>
+        <td><a th:text="${spes.nama}"></a></td>
+        <td><a th:text="${spes.getListSpesialisasiDokter().size()}"></a></td>
+
+    </tr>
+    </tbody>
+</table>

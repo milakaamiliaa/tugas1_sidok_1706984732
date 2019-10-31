@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container-fluid">
+    <h3>Ubah Poli</h3>
+
+    <form th:action="@{/poli/update/{id}(id=${poli.id})}" th:object="${poli}" method="POST">
+        <div class="form-group row">
+            <label for="namaPoli" class="col-sm-2 col-form-label">Nama</label>
+            <div class="col-sm-2">
+                <input th:type="text" class="form-control" id="namaPoli" th:value="${poli.nama}" name="nama">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="lokasiPoli" class="col-sm-2 col-form-label">Lokasi</label>
+            <div class="col-sm-2">
+                <input th:type="text" class="form-control" id="lokasiPoli" th:value="${poli.lokasi}" name="lokasi">
+            </div>
+        </div>
+        <button class="btn btn-sm btn-primary" type="submit">Submit</button>
+    </form>
+</div>
+</body>
+</html>

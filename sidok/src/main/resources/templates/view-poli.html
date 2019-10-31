@@ -1,43 +1,49 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Poli</title>
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
-<h1>Sistem Informasi Dokter</h1>
-<div class="container-fluid">
-    <h2>Daftar Poli</h2>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>No</th>
-            <th>Nama</th>
-            <th>Lokasi</th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="poli, iterationStatus : ${listPoli}">
-            <td><a th:text="$iterationStatus.count}"></a></td>
-            <td><a th:text="${poli.nama}"></a></td>
-            <td><a th:text="${poli.nip}"></a></td>
-            <td><a th:text="${poli.nik}"></a></td>
-            <td><a th:text="${poli.jenisKelamin}"></a></td>
-            <td><a th:text="${poli.spesialisasi}"></a></td>
-            <td>
-                <form th:action="@{#}" method="GET"><button type="submit" name="tambahJadwalButton" class="btn btn-sm btn-primary"></button>Tambah Poli</form>
-                <button type="button" name="ubahDokter" th:value="${iterationStatus.count}" class="btn btn-sm btn-secondary">Ubah</button>
-                <button type="button" name="hapusDokter" th:value="${iterationStatus.count}" class="btn btn-sm btn-secondary">Hapus</button>
-            </td>
-        </tr>
-        
-        </tbody>
-    </table>
-    <button type="button" name="tambahDokter" class="btn btn-sm btn-secondary float-right">Tambah Poli</button>
+<div class="container-fluid" style="float: none; margin-top: 20px; margin-bottom: 20px;">
+    <h2 style="text-align: center; margin-bottom: 20px;">Sistem Informasi Dokter</h2>
+    <div class="row">
+        <div class="container">
+            <div class="card">
+                <div class="card-header bg-dark text-white">Daftar Poli</div>
+                <div class="card-body"></div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Nama</th>
+                        <th scope="col">Lokasi</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="poli : *{listPoli}">
+                        <td th:text="${poli.id}"></td>
+                        <td><a th:href="@{/poli/dokter/{id}(id=${poli.id})}" th:text="${poli.nama}"></a></td>
+                        <td th:text="${poli.lokasi}"></td>
+                        <td>
+                            <form th:action="@{/poli/update/{id}(id=${poli.id})}">
+                                <button class="btn btn-dark" type="submit">Ubah</button>
+                            </form>
+                            <br>
+                            <form th:action="@{/poli/delete/{id}(id=${poli.id})}" th:object="${poli}" method="POST">
+                                <button class="btn btn-danger" type="submit">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <form th:action="@{/poli/tambah}" method="GET">
+                    <button class="btn btn-dark" type="submit" style="float: right; margin-bottom: 10px; margin-right: 20px;">Tambah Poli</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

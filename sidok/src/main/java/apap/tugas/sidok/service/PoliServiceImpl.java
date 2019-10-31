@@ -14,7 +14,6 @@ public class PoliServiceImpl implements PoliService{
     @Autowired
     PoliDb poliDb;
 
-
     @Override
     public void addPoli(PoliModel poli){
         poliDb.save(poli);
@@ -27,4 +26,23 @@ public class PoliServiceImpl implements PoliService{
 
     @Override
     public List<PoliModel> getPoliList(){return poliDb.findAll();}
+
+    @Override
+    public PoliModel changePoli(PoliModel poli){
+        PoliModel targetPoli = poliDb.findById(poli.getId()).get();
+
+        try{
+            targetPoli.setNama(poli.getNama());
+            targetPoli.setLokasi(poli.getLokasi());
+            poliDb.save(targetPoli);
+            return targetPoli;
+        } catch (NullPointerException nullException){
+            return null;
+        }
+    }
+
+    @Override
+    public void deletePoli(PoliModel poli){
+        poliDb.delete(poli);
+    }
 }

@@ -1,9 +1,15 @@
 package apap.tugas.sidok.model;
 
+import org.apache.tomcat.jni.Local;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -11,8 +17,8 @@ import java.util.List;
 @Table(name="dokter")
 public class DokterModel implements Serializable {
 
-    @Size(max=20)
     @Id
+    @Max(20)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -33,7 +39,8 @@ public class DokterModel implements Serializable {
 
     @NotNull
     @Column(name="tanggal_lahir", nullable = false)
-    private Date tanggal_lahir;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate tanggal_lahir;
 
     @NotNull
     @Size(max=255)
@@ -41,18 +48,15 @@ public class DokterModel implements Serializable {
     private String tempat_lahir;
 
     @NotNull
-    @Size(max=255)
+    @Min(1)
     @Column(name="jenis_kelamin", nullable = false)
     private Integer jenis_kelamin;
-
 
     @OneToMany(mappedBy = "dokter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<JadwalJagaModel> listJadwalJaga;
 
     @OneToMany(mappedBy = "dokter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<SpesialisasiDokterModel> listSpesialisasiDokter;
-
-    //Buat method generate NIP
 
     public Long getId() {
         return id;
@@ -86,11 +90,11 @@ public class DokterModel implements Serializable {
         this.nik = nik;
     }
 
-    public Date getTanggal_lahir() {
+    public LocalDate getTanggal_lahir() {
         return tanggal_lahir;
     }
 
-    public void setTanggal_lahir(Date tanggal_lahir) {
+    public void setTanggal_lahir(LocalDate tanggal_lahir) {
         this.tanggal_lahir = tanggal_lahir;
     }
 

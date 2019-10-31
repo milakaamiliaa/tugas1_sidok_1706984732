@@ -6,6 +6,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -14,8 +15,8 @@ import java.io.Serializable;
 @Table(name="jadwalJaga")
 public class JadwalJagaModel implements Serializable {
 
-    @Size(max=20)
     @Id
+    @Max(20)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -29,7 +30,6 @@ public class JadwalJagaModel implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private PoliModel poli;
-
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name="id_dokter", referencedColumnName = "id")

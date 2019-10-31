@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeLeaf.org">
+<head>
+    <title>Beranda</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar(title = 'Tambah Dokter')"></nav>
+<div class="container-fluid">
+    <h2>Tambah Dokter</h2>
+    <br>
+    <form th:action = "@{/dokter/tambah}" method="POST">
+        <div class="form-group">
+            <label>Nama</label>
+            <input type="text" th:name="nama" th:value="${dokter.nama}"/>
+            <br>
+
+            <label>NIK</label>
+            <input type="text" th:name="nik" th:value="${dokter.nik}"/>
+            <br>
+
+            <label>Tanggal Lahir</label>
+            <input type="date" th:name="tanggal_lahir" th:value="${dokter.tanggal_lahir}"/>
+            <br>
+
+            <label>Tempat Lahir</label>
+            <input type="text" th:name="tempat_lahir" th:value="${dokter.tempat_lahir}"/>
+            <br>
+
+            <label>Jenis Kelamin</label>
+            <select th:field="${dokter.jenis_kelamin}">
+                <option value="1" th:text="Laki-Laki"></option>
+                <option value="2" th:text="Perempuan"></option>
+            </select>
+            <br>
+
+            <label>Spesialisasi</label>
+            <div th:each="spre, iter : *{dokter.listSpesialisasiDokter}">
+                <select th:field="*{dokter.listSpesialisasiDokter[__${iter.index}__].spesialisasi}">
+                    <option th:each="spesi : ${listSpesialisasi}" th:value="${{spesi}}" th:text="${spesi.nama}"></option>
+                </select>
+            </div>
+            <br>
+            <button type="submit" th:name="tambahSpesialisasi"  class="btn btn-sm btn-secondary">Tambah Spesialisasi</button>
+        </div>
+        <button type="submit" class="btn btn-sm btn-secondary float-right">Tambah Dokter</button>
+    </form>
+
+</div>
+
+</body>
+</html>
