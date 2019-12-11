@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Beranda</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <h1 style="text-align: center">Sistem Informasi Dokter</h1>
+    <br>
+    <div class="container-fluid">
+
+        <h2>Daftar Dokter</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>NIP</th>
+                <th>NIK</th>
+                <th>Jenis Kelamin</th>
+                <th>Spesialisasi</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr th:each="dokter : ${listDokter}">
+                    <td><a th:text="${dokter.id}"></a></td>
+                    <td><a th:text="${dokter.nama}" th:href="@{/dokter/}+${dokter.nik}"></a></td>
+                    <td><a th:text="${dokter.nip}"></a></td>
+                    <td><a th:text="${dokter.nik}"></a></td>
+                    <td>
+                        <span th:if="${dokter.jenis_kelamin == 1}">Laki-Laki</span>
+                        <span th:if="${dokter.jenis_kelamin == 2}">Perempuan</span>
+                    </td>
+                    <td>
+                        <div th:each="spesialisasi : ${dokter.getListSpesialisasiDokter()}">
+                            <a th:text="${spesialisasi.getSpesialisasi().getNama()}"></a>
+                        </div>
+                    </td>
+
+                    <td>
+                        <form th:action="@{/jadwal/tambah/}+${dokter.nip}" method="GET">
+                            <button type="submit" name="tambahJadwalButton" class="btn btn-sm btn-primary">Tambah Jadwal</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{/dokter/update/}+${dokter.id}">
+                            <button type="submit" th:value="${dokter.id}" class="btn btn-sm btn-secondary">Ubah</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{/dokter/delete/}+${dokter.id}">
+                            <button type="submit" name="hapusDokterButton" th:value="${dokter.id}" class="btn btn-sm btn-secondary">Hapus</button>
+                        </form>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+        <form th:action="@{/dokter/tambah}" method="GET">
+            <button type="submit" name="tambahDokterButton" class="btn btn-primary btn-sm">Tambah Dokter</button>
+        </form>
+
+    </div>
+</body>
+</html>

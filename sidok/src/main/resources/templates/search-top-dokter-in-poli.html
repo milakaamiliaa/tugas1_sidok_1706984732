@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeLeaf.org">
+
+<head>
+    <title> Cari Dokter yang Paling Banyak Bertugas di Suatu Poli </title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div style="align-content: center" class="container-fluid">
+    <div style="text-align: center">
+        <br><h3>Cari Dokter yang Paling Banyak Bertugas di Suatu Poli</h3><br>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div style="align-content: center">
+                <div style="text-align: left">
+                    <form th:action="@{/cari/tugas-terbanyak}" th:object="${dokter}" method="POST">
+                        <table>
+                            <tr><td>Poli<select class="form-control" name="id">
+                                <option value="">--Pilih Poli--</option>
+                                <option th:each="poli: ${listPoli}"
+                                        th:value="${poli.id}"
+                                        th:text="${poli.nama}">
+                                </option>
+                            </select><br></td></tr>
+                            <tr><td>
+                                <button class="btn btn-primary" name="save" type="submit"> Submit </button>
+                            </td></tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div style="align-content: center">
+            <div class="card" th:each="top:${listDokter}">
+                <div class="card-header bg-dark" style="color: white">Detail Dokter</div>
+                <div class="card-body">
+                    <p th:text="'Nama: ' + ${top.nama}"></p>
+                    <p th:text="'NIP: ' + ${top.nip}"></p>
+                    <p th:text="'NIK: ' + ${top.nik}"></p>
+                    <p th:text="'Tempat Lahir: ' + ${top.tempat_lahir}"></p>
+                    <p th:text="'Tanggal Lahir: ' + ${top.tanggal_lahir}"></p>
+                    <p th:if="${top.jenis_kelamin} == 1">Jenis Kelamin: Laki-laki</p>
+                    <p th:unless="${top.jenis_kelamin} == 1">Jenis Kelamin: Perempuan</p>
+                    <p th:text="'Spesialisasi: '"></p>
+                    <table>
+                        <td>
+                            <ul th:each="spesialisasi : ${top.listSpesialisasiDokter}">
+                                <li th:text="${spesialisasi.spesialisasi.nama}"></li>
+                            </ul>
+                        </td>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
+

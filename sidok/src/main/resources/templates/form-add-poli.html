@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeLeaf.org">
+<head>
+    <title>Tambah Poli</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar(title = 'Tambah Poli')"></nav>
+<div class="container-fluid">
+    <h2>Tambah Poli</h2>
+    <br>
+    <form th:action = "@{/poli/tambah}" method="POST">
+        <div class="form-group">
+            <label>Nama</label>
+            <input type="text" th:name="nama" th:value="${poli.nama}"/>
+            <br>
+
+            <label>Lokasi</label>
+            <input type="text" th:name="lokasi" th:value="${poli.lokasi}"/>
+            <br>
+        </div>
+        <button type="submit" class="btn btn-sm btn-secondary float-right">Submit</button>
+    </form>
+
+</div>
+
+</body>
+</html>

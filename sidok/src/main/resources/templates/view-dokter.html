@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeLeaf.org">
+<head>
+    <title>Home</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container-fluid">
+    <h2 align="center">Detail Dokter</h2>
+    <br>
+    <div class="row justify-content-center">
+        <div class="col-2">
+            <label name="nama">Nama</label>
+        </div>
+        <div class="col-2">
+            <label name="nama" th:text="${dokter.nama}">Nama</label>
+
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-2">
+            <label name="nip">NIP</label>
+        </div>
+        <div class="col-2">
+            <label name="nip"th:text="${dokter.nip}">NIP</label>
+
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-2">
+            <label name="nik">NIK</label>
+        </div>
+        <div class="col-2">
+            <label name="nik"th:text="${dokter.nik}">NIK</label>
+
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-2">
+            <label name="tempat_lahir">Tempat Lahir</label>
+        </div>
+        <div class="col-2">
+            <label name="tempat_lahir"th:text="${dokter.tempat_lahir}">Tempat Lahir</label>
+
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-2">
+            <label name="tanggal_lahir">Tanggal Lahir</label>
+        </div>
+        <div class="col-2">
+            <label name="tanggal_lahir"th:text="${dokter.tanggal_lahir}">Tanggal Lahir</label>
+
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-2">
+            <label name="jenis_kelamin">Jenis Kelamin</label>
+        </div>
+        <div class="col-2">
+            <label name="jenis_kelamin"th:text="${dokter.jenis_kelamin}">Jenis Kelamin</label>
+
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-2">
+            <label name="spesialisasi">Spesialisasi</label>
+        </div>
+        <div class="col-2">
+            <div th:each="spesialisasi : ${dokter.getListSpesialisasiDokter()}">
+                <label th:text="${spesialisasi.getSpesialisasi().getNama()}"></label>
+            </div>
+<!--            <div th:each="spesialisasi: ${listSpesialisasi}">-->
+<!--                <label name="spesialisasi" th:text="${spesialisasi.getNama()}">Spesialisasi</label>-->
+<!--            </div>-->
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

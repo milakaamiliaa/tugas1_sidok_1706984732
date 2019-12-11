@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container-fluid" style="float: none; margin-top: 20px; margin-bottom: 20px;">
+    <h2 style="text-align: center; margin-bottom: 20px;">Sistem Informasi Dokter</h2>
+    <div class="row">
+        <div class="container">
+            <div class="card">
+                <div class="card-header bg-dark text-white" th:text="'Daftar Dokter yang Bertugas di ' + ${poli.nama}"></div>
+                <div class="card-body"></div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Nama Dokter</th>
+                        <th scope="col">Spesialisasi</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="jadwalJaga : ${poli.listJadwalJaga}">
+                        <td th:text="${jadwalJaga.id}"></td>
+                        <td th:text="${jadwalJaga.dokter.nama}"></td>
+                        <td>
+                            <div th:each="spesialisasi : ${jadwalJaga.dokter.listSpesialisasiDokter}">
+                                <p th:text="${spesialisasi.spesialisasi.nama}"></p>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
